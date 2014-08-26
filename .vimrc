@@ -14,3 +14,5 @@ filetype on
 " let g:clang_use_library=1
 " let g:clang_library_path='/usr/local/lib'
 colo molokai 
+map <F3> :w! /tmp/tmp<CR>
+map <F4> :r /tmp/tmp<CR>
