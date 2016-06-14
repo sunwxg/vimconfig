@@ -231,6 +231,11 @@ nmap <F3> :.w! /tmp/tmp<CR>
 vmap <F3> :w! /tmp/tmp<CR>
 map <F4> :r /tmp/tmp<CR>
 
+"----------------------------------------
+"set default clipboard as system clipboard
+"---------------------------------------
+set clipboard=unnamedplus
+
 "----------------------------------------------------------------------
 "map page up and down key
 "----------------------------------------------------------------------
