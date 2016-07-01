@@ -35,10 +35,7 @@ set splitbelow
 set ignorecase
 set smartcase
 
-"-----------------------------------------------------
-"clipboard: use system clipboard
-"-----------------------------------------------------
-"set clipboard=unnamed
+set bs=2
 
 "-----------------------------------------
 "set status bar
@@ -233,8 +230,13 @@ map <F4> :r /tmp/tmp<CR>
 
 "----------------------------------------
 "set default clipboard as system clipboard
+"vim support +X11
+":help unnamedplus
+":help quoteplus
 "---------------------------------------
-set clipboard=unnamedplus
+if has('unnamedplus')
+	set clipboard=unnamedplus
+endif
 
 "----------------------------------------------------------------------
 "map page up and down key
