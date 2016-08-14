@@ -5,7 +5,7 @@ set encoding=utf-8
 set t_Co=256
 set tabstop=8
 set shiftwidth=8
-set softtabstop=8
+"set softtabstop=8
 set number
 set ruler
 set cursorline
@@ -120,6 +120,9 @@ filetype plugin indent on    " required
 "JavaScript
 "-----------------------------------------
 let g:javascript_plugin_jsdoc = 1
+autocmd FileType javascript set tabstop=4
+autocmd FileType javascript set shiftwidth=4
+autocmd FileType javascript set expandtab
 
 "-----------------------------------------
 "Unite
