@@ -101,6 +101,8 @@ Plugin 'terryma/vim-multiple-cursors'
 
 Plugin 'git@github.com:stefandtw/quickfix-reflector.vim.git'
 
+Plugin 'pangloss/vim-javascript'
+
 call vundle#end()            " required
 filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
@@ -112,6 +114,12 @@ filetype plugin indent on    " required
 " :PluginUpdate
 " :PluginSearch foo - searches for foo; append `!` to refresh local cache
 " :PluginClean      - confirms removal of unused plugins; append `!` to
+
+
+"-----------------------------------------
+"JavaScript
+"-----------------------------------------
+let g:javascript_plugin_jsdoc = 1
 
 "-----------------------------------------
 "Unite
@@ -234,9 +242,10 @@ map <F4> :r /tmp/tmp<CR>
 ":help unnamedplus
 ":help quoteplus
 "---------------------------------------
-if has('unnamedplus')
+"if has('unnamedplus')
 	set clipboard=unnamedplus
-endif
+	"set clipboard=unnamed
+"endif
 
 "----------------------------------------------------------------------
 "map page up and down key
