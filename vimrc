@@ -131,10 +131,10 @@ let g:unite_source_history_yank_enable = 1
 nnoremap <leader>y :Unite yank<cr>
 
 "nnoremap <leader>f :Unite -auto-resize -start-insert file<cr>
-nnoremap <leader>f :Unite -auto-resize -start-insert file file_mru file_rec file_rec/async<cr>
-nnoremap <leader>b :Unite -auto-resize -quick-match buffer<cr>
-nnoremap <leader>l :Unite -auto-resize -start-insert line<cr>
-nnoremap <leader>c :Unite -auto-resize -start-insert grep:.<cr>
+nnoremap <leader>f :Unite -auto-resize -direction=botright -start-insert file file_mru file_rec file_rec/async<cr>
+nnoremap <leader>b :Unite -auto-resize -direction=botright -quick-match buffer<cr>
+nnoremap <leader>l :Unite -auto-resize -direction=botright -start-insert line<cr>
+nnoremap <leader>c :Unite -auto-resize -direction=botright -start-insert grep:.<cr>
 
 
 "-----------------------------------------
