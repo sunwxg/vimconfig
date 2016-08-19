@@ -99,7 +99,7 @@ Plugin 'git://github.com/tpope/vim-surround'
 
 Plugin 'terryma/vim-multiple-cursors'
 
-Plugin 'git@github.com:stefandtw/quickfix-reflector.vim.git'
+"Plugin 'git@github.com:stefandtw/quickfix-reflector.vim.git'
 
 Plugin 'pangloss/vim-javascript'
 
@@ -115,6 +115,18 @@ filetype plugin indent on    " required
 " :PluginSearch foo - searches for foo; append `!` to refresh local cache
 " :PluginClean      - confirms removal of unused plugins; append `!` to
 
+
+"-----------------------------------------
+"syntastic
+"-----------------------------------------
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 
 "-----------------------------------------
 "JavaScript
@@ -140,7 +152,7 @@ nnoremap <leader>c :Unite -auto-resize -direction=botright -start-insert grep:.<
 "-----------------------------------------
 "Ack
 "-----------------------------------------
-"let g:ackprg = 'ack-grep'
+let g:ackhighlight = 1
 
 "-----------------------------------------
 "Airline
@@ -226,18 +238,12 @@ set complete+=kspell
 set background=dark
 colorscheme PaperColor
 
-"set background=dark
-"colo solarized
-"hi CursorLine ctermbg=233
-"colo molokai_no_bg
-"colo desert
-
 "----------------------------------------
 "copy past between two vim in two windows
 "---------------------------------------
-nmap <F3> :.w! /tmp/tmp<CR>
-vmap <F3> :w! /tmp/tmp<CR>
-map <F4> :r /tmp/tmp<CR>
+"nmap <F3> :.w! /tmp/tmp<CR>
+"vmap <F3> :w! /tmp/tmp<CR>
+"map <F4> :r /tmp/tmp<CR>
 
 "----------------------------------------
 "set default clipboard as system clipboard
@@ -246,7 +252,7 @@ map <F4> :r /tmp/tmp<CR>
 ":help quoteplus
 "---------------------------------------
 "if has('unnamedplus')
-	set clipboard=unnamedplus
+set clipboard=unnamedplus
 	"set clipboard=unnamed
 "endif
 
@@ -286,33 +292,27 @@ set csverb
 "-------------------------------------------
 "tagbar
 "-------------------------------------------
-map <leader>t :TagbarToggle<cr>
-
-"-------------------------------------------
-"tap list
-"-------------------------------------------
-"nmap <F10> :TlistToggle<CR>
-"let Tlist_Ctags_Cmd = "/usr/bin/ctags"
-"let Tlist_Inc_Winwidth = 0
-"let Tlist_WinWidth = 60
-"let Tlist_Exit_OnlyWindow = 0
-"let Tlist_Auto_Open = 0
-"let Tlist_Use_Right_Window = 1
+"map <leader>t :TagbarToggle<cr>
 
 "--------------------------------------------
-"source explore
+"jump window map key
 "--------------------------------------------
-nmap <F7> :SrcExplToggle<CR>
 nmap <C-H> <C-W>h
 nmap <C-J> <C-W>j
 nmap <C-K> <C-W>k
 nmap <C-L> <C-W>l
 
-let g:SrcExpl_winHeight = 8
-let g:SrcExpl_refreshTime = 100
-let g:SrcExpl_jumpKey = "<ENTER>"
-let g:SrcExpl_gobackKey = "<SPACE>"
-let g:SrcExpl_isUpdateTags = 0
+"let g:SrcExpl_winHeight = 8
+"let g:SrcExpl_refreshTime = 100
+"let g:SrcExpl_jumpKey = "<ENTER>"
+"let g:SrcExpl_gobackKey = "<SPACE>"
+"let g:SrcExpl_isUpdateTags = 0
+
+"-------------------------------------------
+"quick browse
+"-------------------------------------------
+nnoremap  <Tab> <c-]>
+nnoremap  <S-Tab> <c-T>
 
 "-------------------------------------------
 "NERD Tree
