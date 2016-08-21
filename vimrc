@@ -269,12 +269,15 @@ set scroll=2
 "--------------------------------------------
 "ctags database
 "-------------------------------------------
-if filereadable("tags")
-	set tags=tags
-else
+set autochdir
+set tags=./tags;
+set noautochdir
+"if filereadable("tags")
+	"set tags=tags
+"else
 "au BufRead,BufNewFile *.go set tags=/home/home/person/cscope/gotags
-au BufRead,BufNewFile *.c  set tags=/home/home/linux-4.5/tags
-endif
+"au BufRead,BufNewFile *.c  set tags=/home/home/linux-4.5/tags
+"endif
 
 "------------------------------------------
 "cscope database
