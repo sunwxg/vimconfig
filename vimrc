@@ -103,6 +103,8 @@ Plugin 'terryma/vim-multiple-cursors'
 
 Plugin 'pangloss/vim-javascript'
 
+Plugin 'ternjs/tern_for_vim'
+
 call vundle#end()            " required
 filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
@@ -115,6 +117,10 @@ filetype plugin indent on    " required
 " :PluginSearch foo - searches for foo; append `!` to refresh local cache
 " :PluginClean      - confirms removal of unused plugins; append `!` to
 
+"-----------------------------------------
+"tern-for-vim
+"-----------------------------------------
+set tern_map_keys=1
 
 "-----------------------------------------
 "syntastic
