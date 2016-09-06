@@ -41,7 +41,7 @@ set bs=2
 "set status bar
 "-----------------------------------------
 set laststatus=2
-set statusline=%<%F\ %h%m%r%=%-14.(%l,%c%V%)\ %P
+"set statusline=%<%F\ %h%m%r%=%-14.(%l,%c%V%)\ %P
 
 "-----------------------------------------
 "relativenumber
@@ -168,6 +168,8 @@ let g:airline_right_alt_sep = ''
 let g:airline_symbols.branch = ''
 let g:airline_symbols.readonly = ''
 let g:airline_symbols.linenr = ''
+
+let g:airline#extensions#whitespace#enabled = 0
 
 "-----------------------------------------
 "YouCompleteMe
