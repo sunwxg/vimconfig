@@ -120,7 +120,7 @@ filetype plugin indent on    " required
 "-----------------------------------------
 "tern-for-vim
 "-----------------------------------------
-set tern_map_keys=1
+let g:tern_map_keys=1
 
 "-----------------------------------------
 "syntastic
