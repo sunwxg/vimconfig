@@ -54,9 +54,15 @@ set relativenumber
 autocmd BufWritePre * :%s/\s\+$//e
 
 "-----------------------------------------
+" Tab navigation
+"-----------------------------------------
+nmap  n :tabnew<CR>
+nmap  - :tabprevious<CR>
+nmap  = :tabnext<CR>
+
+"-----------------------------------------
 "vundle
 "-----------------------------------------
-
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
@@ -71,39 +77,37 @@ Plugin 'Valloric/YouCompleteMe'
 
 Plugin 'NLKNguyen/papercolor-theme'
 
-Plugin 'git://github.com/jiangmiao/auto-pairs.git'
+Plugin 'jiangmiao/auto-pairs'
 
 Plugin 'mileszs/ack.vim'
 
-Plugin 'git://github.com/fatih/vim-go'
+Plugin 'fatih/vim-go'
 
-Plugin 'git://github.com/majutsushi/tagbar.git'
+Plugin 'majutsushi/tagbar'
 
-Plugin 'git://github.com/scrooloose/syntastic.git'
+Plugin 'scrooloose/syntastic'
 
 Plugin 'janko-m/vim-test'
 
-Plugin 'git://github.com/scrooloose/nerdtree.git'
+Plugin 'scrooloose/nerdtree'
 
-Plugin 'git://github.com/scrooloose/nerdcommenter.git'
+Plugin 'scrooloose/nerdcommenter'
 
 Plugin 'bling/vim-airline'
 
-Plugin 'git://github.com/rhysd/vim-go-impl'
+Plugin 'rhysd/vim-go-impl'
 
-Plugin 'git://github.com/Shougo/unite.vim'
+Plugin 'Shougo/unite.vim'
 
-Plugin 'git://github.com/Shougo/neomru.vim'
+Plugin 'Shougo/neomru.vim'
 
-Plugin 'git://github.com/tpope/vim-surround'
+Plugin 'tpope/vim-surround'
 
 Plugin 'terryma/vim-multiple-cursors'
 
-"Plugin 'git@github.com:stefandtw/quickfix-reflector.vim.git'
-
 Plugin 'pangloss/vim-javascript'
 
-Plugin 'ternjs/tern_for_vim'
+"Plugin 'ternjs/tern_for_vim'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -149,16 +153,17 @@ let g:unite_source_history_yank_enable = 1
 nnoremap <leader>y :Unite yank<cr>
 
 "nnoremap <leader>f :Unite -auto-resize -start-insert file<cr>
-nnoremap <leader>f :Unite -auto-resize -direction=botright -start-insert file file_mru file_rec file_rec/async<cr>
+"nnoremap <leader>f :Unite -auto-resize -direction=botright -start-insert file file_mru file_rec file_rec/async<cr>
+nnoremap <leader>f :Unite -auto-resize -direction=botright -start-insert file_rec file_rec/async<cr>
 nnoremap <leader>b :Unite -auto-resize -direction=botright -quick-match buffer<cr>
 nnoremap <leader>l :Unite -auto-resize -direction=botright -start-insert line<cr>
 nnoremap <leader>c :Unite -auto-resize -direction=botright -start-insert grep:.<cr>
 
-
 "-----------------------------------------
 "Ack
 "-----------------------------------------
-let g:ackhighlight = 1
+nnoremap <leader>ss :Ack!<CR>
+nnoremap <leader>sc :AckFile! %<CR>
 
 "-----------------------------------------
 "Airline
@@ -271,6 +276,8 @@ nmap <Up> 2<C-Y>
 nmap <Down> 2<C-E>
 nmap <Left> <C-B>
 nmap <Right> <C-F>
+nmap f <C-F>
+nmap b <C-B>
 
 set scroll=2
 
@@ -303,7 +310,7 @@ set csverb
 "-------------------------------------------
 "tagbar
 "-------------------------------------------
-"map <leader>t :TagbarToggle<cr>
+map <leader>t :TagbarToggle<cr>
 
 "--------------------------------------------
 "jump window map key
@@ -312,12 +319,6 @@ nmap <C-H> <C-W>h
 nmap <C-J> <C-W>j
 nmap <C-K> <C-W>k
 nmap <C-L> <C-W>l
-
-"let g:SrcExpl_winHeight = 8
-"let g:SrcExpl_refreshTime = 100
-"let g:SrcExpl_jumpKey = "<ENTER>"
-"let g:SrcExpl_gobackKey = "<SPACE>"
-"let g:SrcExpl_isUpdateTags = 0
 
 "-------------------------------------------
 "quick browse
@@ -383,8 +384,8 @@ set undolevels=5000
 "" Highlight anything in the 81st column of long lines
 "============================================================================
 
-highlight ColorColumn ctermbg=magenta
-call matchadd('ColorColumn', '\%81v', 100)
+"highlight ColorColumn ctermbg=magenta
+"call matchadd('ColorColumn', '\%81v', 100)
 
 
 "============================================================================
@@ -393,6 +394,10 @@ call matchadd('ColorColumn', '\%81v', 100)
 syntax enable
 set foldmethod=syntax
 
+augroup XML
+    autocmd!
+    autocmd FileType xml setlocal foldmethod=indent foldlevelstart=999 foldminlines=0
+augroup END
 
 "============================================================================
 "" Fold lines for which the specified expression produces a fold-level
