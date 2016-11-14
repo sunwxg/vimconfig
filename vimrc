@@ -163,7 +163,7 @@ nnoremap <leader>c :Unite -auto-resize -direction=botright -start-insert grep:.<
 "Ack
 "-----------------------------------------
 nnoremap <leader>ss :Ack!<CR>
-nnoremap <leader>sc :AckFile! %<CR>
+nnoremap <leader>sc :AckFile! <C-R><C-W> %<CR>
 
 "-----------------------------------------
 "Airline
