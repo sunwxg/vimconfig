@@ -124,7 +124,7 @@ filetype plugin indent on    " required
 "-----------------------------------------
 "tern-for-vim
 "-----------------------------------------
-let g:tern_map_keys=1
+"let g:tern_map_keys=1
 
 "-----------------------------------------
 "syntastic
@@ -276,6 +276,9 @@ nmap <Up> 2<C-Y>
 nmap <Down> 2<C-E>
 nmap <Left> <C-B>
 nmap <Right> <C-F>
+
+nmap j <C-Y>
+nmap k <C-E>
 nmap f <C-F>
 nmap b <C-B>
 
