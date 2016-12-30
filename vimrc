@@ -57,8 +57,8 @@ autocmd BufWritePre * :%s/\s\+$//e
 " Tab navigation
 "-----------------------------------------
 nmap  n :tabnew<CR>
-nmap  - :tabprevious<CR>
-nmap  = :tabnext<CR>
+nmap  h :tabprevious<CR>
+nmap  l :tabnext<CR>
 
 "-----------------------------------------
 "vundle
@@ -83,7 +83,8 @@ Plugin 'mileszs/ack.vim'
 
 Plugin 'fatih/vim-go'
 
-Plugin 'majutsushi/tagbar'
+"Plugin 'majutsushi/tagbar'
+Plugin 'vim-scripts/taglist.vim'
 
 Plugin 'scrooloose/syntastic'
 
@@ -107,6 +108,8 @@ Plugin 'terryma/vim-multiple-cursors'
 
 Plugin 'pangloss/vim-javascript'
 
+Plugin 'vim-scripts/gtags.vim'
+
 "Plugin 'ternjs/tern_for_vim'
 
 call vundle#end()            " required
@@ -125,6 +128,13 @@ filetype plugin indent on    " required
 "tern-for-vim
 "-----------------------------------------
 "let g:tern_map_keys=1
+
+"-----------------------------------------
+" quick-fix window
+"-----------------------------------------
+nmap  <leader>co :copen <CR>
+nmap  <leader>cc :ccl<CR>
+
 
 "-----------------------------------------
 "syntastic
@@ -150,18 +160,20 @@ autocmd FileType javascript set expandtab
 "Unite
 "-----------------------------------------
 let g:unite_source_history_yank_enable = 1
-nnoremap <leader>y :Unite yank<cr>
+"nnoremap <leader>y :Unite yank<cr>
 
 "nnoremap <leader>f :Unite -auto-resize -start-insert file<cr>
 "nnoremap <leader>f :Unite -auto-resize -direction=botright -start-insert file file_mru file_rec file_rec/async<cr>
 nnoremap <leader>f :Unite -auto-resize -direction=botright -start-insert file_rec file_rec/async<cr>
-nnoremap <leader>b :Unite -auto-resize -direction=botright -quick-match buffer<cr>
-nnoremap <leader>l :Unite -auto-resize -direction=botright -start-insert line<cr>
-nnoremap <leader>c :Unite -auto-resize -direction=botright -start-insert grep:.<cr>
+"nnoremap <leader>b :Unite -auto-resize -direction=botright -quick-match buffer<cr>
+"nnoremap <leader>l :Unite -auto-resize -direction=botright -start-insert line<cr>
+"nnoremap <leader>c :Unite -auto-resize -direction=botright -start-insert grep:.<cr>
 
 "-----------------------------------------
 "Ack
 "-----------------------------------------
+let g:ackprg = "ag --vimgrep"
+let g:ack_autoclose = 1
 nnoremap <leader>ss :Ack!<CR>
 nnoremap <leader>sc :AckFile! <C-R><C-W> %<CR>
 
@@ -196,27 +208,29 @@ nnoremap <leader>gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
 "-----------------------------------------
 "vim-go
 "-----------------------------------------
-autocmd FileType go map <leader>go :w<CR>:!go run %<enter>
 " autocmd FileType go map <leader>r :w<CR>:!go test ./...<enter>
-autocmd FileType go map <leader>gr :w<CR>:!colorgo test ./...<enter>
 "autocmd FileType go map <leader>rt :w<CR>:!./test.sh<enter>
 "autocmd FileType go map <leader>b :w<CR>:!./bench.sh<enter>
-autocmd FileType go map <leader>gl :w<CR>:GoLint<enter>
 "autocmd FileType xml map <leader>l :w<CR>:silent %!xmllint --encode UTF-8--format -<enter>
-autocmd FileType go map <leader>gv :w<CR>:GoVet<enter>
-autocmd FileType go map <leader>mt :TestFile<enter>
-autocmd FileType go map <leader>mm :TestLast<enter>
-autocmd FileType go map <leader>mtl :TestNearest<enter>
 "autocmd FileType go nmap <Leader>ds <Plug>(go-def-split)
 "autocmd FileType go nmap <Leader>dv <Plug>(go-def-vertical)
 "autocmd FileType go nmap <Leader>dt <Plug>(go-def-tab)
-autocmd FileType go nmap <Leader>d <Plug>(go-def)
-autocmd FileType go nmap <Leader>gd <Plug>(go-doc)
-autocmd FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
-autocmd FileType go nmap <Leader>gb <Plug>(go-doc-browser)
-autocmd FileType go nmap <Leader>gs <Plug>(go-implements)
-autocmd FileType go nmap <Leader>gi <Plug>(go-info)
-autocmd FileType go nmap <Leader>ge <Plug>(go-rename)
+
+"autocmd FileType go map <leader>go :w<CR>:!go run %<enter>
+"autocmd FileType go map <leader>gr :w<CR>:!colorgo test ./...<enter>
+"autocmd FileType go map <leader>gl :w<CR>:GoLint<enter>
+"autocmd FileType go map <leader>gv :w<CR>:GoVet<enter>
+"autocmd FileType go map <leader>mt :TestFile<enter>
+"autocmd FileType go map <leader>mm :TestLast<enter>
+"autocmd FileType go map <leader>mtl :TestNearest<enter>
+"autocmd FileType go nmap <Leader>d <Plug>(go-def)
+"autocmd FileType go nmap <Leader>gd <Plug>(go-doc)
+"autocmd FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
+"autocmd FileType go nmap <Leader>gb <Plug>(go-doc-browser)
+"autocmd FileType go nmap <Leader>gs <Plug>(go-implements)
+"autocmd FileType go nmap <Leader>gi <Plug>(go-info)
+"autocmd FileType go nmap <Leader>ge <Plug>(go-rename)
+
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
 let g:go_highlight_structs = 1
@@ -239,7 +253,7 @@ iab #* *****************************************************
 "spell check
 "-----------------------------------------
 "set spell
-autocmd BufRead,BufNewFile *.md setlocal spell
+"autocmd BufRead,BufNewFile *.md setlocal spell
 "autocmd BufRead,BufNewFile *.txt setlocal spell
 set spelllang=en_us
 "C-x C-N can complete word
@@ -277,12 +291,15 @@ nmap <Down> 2<C-E>
 nmap <Left> <C-B>
 nmap <Right> <C-F>
 
-nmap j <C-Y>
-nmap k <C-E>
+nmap k <C-Y>
+nmap j <C-E>
 nmap f <C-F>
 nmap b <C-B>
 
 set scroll=2
+
+nmap <C-L> 20zl "scroll 20 characters to right"
+nmap <C-H> 20zh "scroll 20 characters to left"
 
 "--------------------------------------------
 "ctags database
@@ -311,9 +328,13 @@ endif
 set csverb
 
 "-------------------------------------------
-"tagbar
+"taglist
 "-------------------------------------------
-map <leader>t :TagbarToggle<cr>
+:autocmd FileType taglist set nonumber
+:autocmd FileType taglist set norelativenumber
+map <leader>t :TlistToggle<cr>
+let Tlist_Use_Right_Window=1
+let Tlist_WinWidth = 40
 
 "--------------------------------------------
 "jump window map key
@@ -328,6 +349,8 @@ nmap <C-L> <C-W>l
 "-------------------------------------------
 nnoremap  <Tab> <c-]>
 nnoremap  <S-Tab> <c-T>
+nnoremap i :GtagsCursor <CR>:ccl<CR>
+nnoremap o <c-o>
 
 "-------------------------------------------
 "NERD Tree
