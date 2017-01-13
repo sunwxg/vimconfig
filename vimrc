@@ -51,12 +51,12 @@ set relativenumber
 "-----------------------------------------
 "strip trailing white space"
 "-----------------------------------------
-autocmd BufWritePre * :%s/\s\+$//e
+"autocmd BufWritePre * :%s/\s\+$//e
 
 "-----------------------------------------
 " Tab navigation
 "-----------------------------------------
-nmap  n :tabnew<CR>
+"nmap  n :tabnew<CR>
 nmap  h :tabprevious<CR>
 nmap  l :tabnext<CR>
 
@@ -73,17 +73,17 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
-Plugin 'Valloric/YouCompleteMe'
+"Plugin 'Valloric/YouCompleteMe'
+Plugin 'Shougo/neocomplete'
 
 Plugin 'NLKNguyen/papercolor-theme'
 
-Plugin 'jiangmiao/auto-pairs'
+"Plugin 'jiangmiao/auto-pairs'
 
 Plugin 'mileszs/ack.vim'
 
 Plugin 'fatih/vim-go'
 
-"Plugin 'majutsushi/tagbar'
 Plugin 'vim-scripts/taglist.vim'
 
 Plugin 'scrooloose/syntastic'
@@ -110,6 +110,7 @@ Plugin 'pangloss/vim-javascript'
 
 Plugin 'vim-scripts/gtags.vim'
 
+Plugin 'Raimondi/delimitMate'
 "Plugin 'ternjs/tern_for_vim'
 
 call vundle#end()            " required
@@ -130,11 +131,40 @@ filetype plugin indent on    " required
 "let g:tern_map_keys=1
 
 "-----------------------------------------
+"neocomplete
+"-----------------------------------------
+" Disable AutoComplPop.
+let g:acp_enableAtStartup = 0
+" Use neocomplete.
+let g:neocomplete#enable_at_startup = 1
+" Use smartcase.
+let g:neocomplete#enable_smart_case = 1
+" Set minimum syntax keyword length.
+let g:neocomplete#sources#syntax#min_keyword_length = 3
+
+" Plugin key-mappings.
+inoremap <expr><C-g>     neocomplete#undo_completion()
+"inoremap <expr><C-l>     neocomplete#complete_common_string()
+
+" Recommended key-mappings.
+" <CR>: close popup and save indent.
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function()
+    return neocomplete#close_popup() . "\<CR>"
+endfunction
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" <C-h>, <BS>: close popup and delete backword char.
+"inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><C-y>  neocomplete#close_popup()
+inoremap <expr><C-e>  neocomplete#cancel_popup()
+
+"-----------------------------------------
 " quick-fix window
 "-----------------------------------------
 nmap  <leader>co :copen <CR>
 nmap  <leader>cc :ccl<CR>
-
 
 "-----------------------------------------
 "syntastic
@@ -197,13 +227,13 @@ let g:airline#extensions#whitespace#enabled = 0
 "-----------------------------------------
 "YouCompleteMe
 "-----------------------------------------
-let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
+"let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
 
-let g:ycm_confirm_extra_conf = 0
-let g:ycm_show_diagnostics_ui = 0
-nnoremap <leader>gl :YcmCompleter GoToDeclaration<CR>
-nnoremap <leader>gf :YcmCompleter GoToDefinition<CR>
-nnoremap <leader>gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
+"let g:ycm_confirm_extra_conf = 0
+"let g:ycm_show_diagnostics_ui = 0
+"nnoremap <leader>gl :YcmCompleter GoToDeclaration<CR>
+"nnoremap <leader>gf :YcmCompleter GoToDefinition<CR>
+"nnoremap <leader>gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
 "-----------------------------------------
 "vim-go
@@ -262,6 +292,7 @@ set complete+=kspell
 "-----------------------------------------
 "color scheme
 "----------------------------------------
+let g:solarized_termcolors=256
 set background=dark
 colorscheme PaperColor
 
@@ -298,8 +329,10 @@ nmap b <C-B>
 
 set scroll=2
 
-nmap <C-L> 20zl "scroll 20 characters to right"
-nmap <C-H> 20zh "scroll 20 characters to left"
+"scroll 20 characters to right"
+nmap m 20zl
+"scroll 20 characters to left"
+nmap n 20zh 
 
 "--------------------------------------------
 "ctags database
@@ -339,10 +372,10 @@ let Tlist_WinWidth = 40
 "--------------------------------------------
 "jump window map key
 "--------------------------------------------
-nmap <C-H> <C-W>h
-nmap <C-J> <C-W>j
-nmap <C-K> <C-W>k
-nmap <C-L> <C-W>l
+nmap <leader>wh <C-W>h
+nmap <leader>wj <C-W>j
+nmap <leader>wk <C-W>k
+nmap <leader>wl <C-W>l
 
 "-------------------------------------------
 "quick browse
