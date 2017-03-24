@@ -113,6 +113,8 @@ Plugin 'vim-scripts/gtags.vim'
 Plugin 'Raimondi/delimitMate'
 "Plugin 'ternjs/tern_for_vim'
 
+"Plugin 'vim-scripts/XML-Folding'
+
 call vundle#end()            " required
 filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
@@ -324,15 +326,15 @@ nmap <Right> <C-F>
 
 nmap k <C-Y>
 nmap j <C-E>
-nmap f <C-F>
-nmap b <C-B>
+nmap n <C-F>
+nmap m <C-B>
 
 set scroll=2
 
 "scroll 20 characters to right"
-nmap m 20zl
+"nmap m 20zl
 "scroll 20 characters to left"
-nmap n 20zh 
+"nmap n 20zh 
 
 "--------------------------------------------
 "ctags database
@@ -451,12 +453,12 @@ set undolevels=5000
 "" Fold lines according to the file's syntax
 "============================================================================
 syntax enable
-set foldmethod=syntax
+"set foldmethod=syntax
 
-augroup XML
-    autocmd!
-    autocmd FileType xml setlocal foldmethod=indent foldlevelstart=999 foldminlines=0
-augroup END
+"augroup XML
+    "autocmd!
+    "autocmd FileType xml setlocal foldmethod=indent foldlevelstart=999 foldminlines=0
+"augroup END
 
 "============================================================================
 "" Fold lines for which the specified expression produces a fold-level
@@ -477,5 +479,5 @@ augroup END
 "============================================================================
 " Show/hide fold structure in the left margin
 "============================================================================
-set foldcolumn=6
-set foldcolumn&
+"set foldcolumn=6
+"set foldcolumn&
