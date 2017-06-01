@@ -3,8 +3,8 @@
 "-----------------------------------------------------
 set encoding=utf-8
 set t_Co=256
-set tabstop=8
-set shiftwidth=8
+set tabstop=4
+set shiftwidth=4
 "set softtabstop=8
 set number
 set ruler
@@ -187,6 +187,13 @@ let g:javascript_plugin_jsdoc = 1
 autocmd FileType javascript set tabstop=4
 autocmd FileType javascript set shiftwidth=4
 autocmd FileType javascript set expandtab
+
+"-----------------------------------------
+"C file
+"-----------------------------------------
+let g:javascript_plugin_jsdoc = 1
+autocmd FileType c set tabstop=8
+autocmd FileType c set shiftwidth=8
 
 "-----------------------------------------
 "Unite
@@ -374,10 +381,10 @@ let Tlist_WinWidth = 40
 "--------------------------------------------
 "jump window map key
 "--------------------------------------------
-nmap <leader>wh <C-W>h
-nmap <leader>wj <C-W>j
-nmap <leader>wk <C-W>k
-nmap <leader>wl <C-W>l
+"nmap <leader>wh <C-W>h
+"nmap <leader>wj <C-W>j
+"nmap <leader>wk <C-W>k
+"nmap <leader>wl <C-W>l
 
 "-------------------------------------------
 "quick browse
