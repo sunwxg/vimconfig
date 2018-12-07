@@ -1,3 +1,73 @@
+"-----------------------------------------
+"vundle
+"-----------------------------------------
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+"Plugin 'Valloric/YouCompleteMe'
+Plugin 'Shougo/neocomplete'
+
+Plugin 'Shougo/unite.vim'
+
+Plugin 'Shougo/neomru.vim'
+
+Plugin 'NLKNguyen/papercolor-theme'
+
+"Plugin 'jiangmiao/auto-pairs'
+
+Plugin 'mileszs/ack.vim'
+
+"Plugin 'rking/ag.vim'
+
+Plugin 'fatih/vim-go'
+
+Plugin 'vim-scripts/taglist.vim'
+
+Plugin 'vim-scripts/gtags.vim'
+
+"Plugin 'janko-m/vim-test'
+
+Plugin 'scrooloose/syntastic'
+
+Plugin 'scrooloose/nerdtree'
+
+Plugin 'scrooloose/nerdcommenter'
+
+Plugin 'tpope/vim-surround'
+
+Plugin 'terryma/vim-multiple-cursors'
+
+Plugin 'hail2u/vim-css3-syntax'
+Plugin 'ap/vim-css-color'
+
+Plugin 'airblade/vim-gitgutter'
+
+"Plugin 'Yggdroot/indentLine'
+
+"Plugin 'Raimondi/delimitMate'
+"Plugin 'ternjs/tern_for_vim'
+
+Plugin 'valloric/vim-indent-guides'
+
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just
+" :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to
+
 "-----------------------------------------------------
 "display
 "-----------------------------------------------------
@@ -25,9 +95,7 @@ set nobackup
 set noswapfile
 
 syntax on
-filetype on
-filetype plugin on
-filetype plugin indent on
+set nopaste
 
 set splitright
 set splitbelow
@@ -36,12 +104,6 @@ set ignorecase
 set smartcase
 
 set bs=2
-
-"-----------------------------------------
-"set status bar
-"-----------------------------------------
-set laststatus=2
-"set statusline=%<%F\ %h%m%r%=%-14.(%l,%c%V%)\ %P
 
 "-----------------------------------------
 "relativenumber
@@ -61,76 +123,25 @@ nmap  h :tabprevious<CR>
 nmap  l :tabnext<CR>
 
 "-----------------------------------------
-"vundle
+"set status bar
 "-----------------------------------------
-set nocompatible              " be iMproved, required
-filetype off                  " required
+set laststatus=2
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
-
-"Plugin 'Valloric/YouCompleteMe'
-Plugin 'Shougo/neocomplete'
-
-Plugin 'NLKNguyen/papercolor-theme'
-
-"Plugin 'jiangmiao/auto-pairs'
-
-Plugin 'mileszs/ack.vim'
-
-Plugin 'fatih/vim-go'
-
-Plugin 'vim-scripts/taglist.vim'
-
-Plugin 'scrooloose/syntastic'
-
-Plugin 'janko-m/vim-test'
-
-Plugin 'scrooloose/nerdtree'
-
-Plugin 'scrooloose/nerdcommenter'
-
-Plugin 'bling/vim-airline'
-
-Plugin 'rhysd/vim-go-impl'
-
-Plugin 'Shougo/unite.vim'
-
-Plugin 'Shougo/neomru.vim'
-
-Plugin 'tpope/vim-surround'
-
-Plugin 'terryma/vim-multiple-cursors'
-
-Plugin 'pangloss/vim-javascript'
-
-Plugin 'vim-scripts/gtags.vim'
-
-Plugin 'Raimondi/delimitMate'
-"Plugin 'ternjs/tern_for_vim'
-
-"Plugin 'vim-scripts/XML-Folding'
-
-call vundle#end()            " required
-filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-"
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just
-" :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to
+"------------------------------------------------------
+" Hide the default mode text (e.g. -- INSERT -- below the statusline)
+"------------------------------------------------------
+set noshowmode
 
 "-----------------------------------------
-"tern-for-vim
+"Disable recording
 "-----------------------------------------
-"let g:tern_map_keys=1
+map q <Nop>
+
+"-----------------------------------------
+"Indent line
+"-----------------------------------------
+"let g:indentLine_char = '⎸'
+let g:indentLine_char = '¦'
 
 "-----------------------------------------
 "neocomplete
@@ -171,13 +182,13 @@ nmap  <leader>cc :ccl<CR>
 "-----------------------------------------
 "syntastic
 "-----------------------------------------
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
 
 "let g:syntastic_always_populate_loc_list = 1
 "let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 
 "-----------------------------------------
@@ -191,9 +202,39 @@ autocmd FileType javascript set expandtab
 "-----------------------------------------
 "C file
 "-----------------------------------------
-let g:javascript_plugin_jsdoc = 1
 autocmd FileType c set tabstop=8
 autocmd FileType c set shiftwidth=8
+
+autocmd FileType cc set tabstop=8
+autocmd FileType cc set shiftwidth=8
+
+autocmd FileType cpp set tabstop=8
+autocmd FileType cpp set shiftwidth=8
+
+"-----------------------------------------
+"xml file
+"-----------------------------------------
+autocmd FileType xml set tabstop=2
+autocmd FileType xml set shiftwidth=2
+
+"-----------------------------------------
+"vala file
+"-----------------------------------------
+autocmd BufRead,BufNewFile *.vala setfiletype vala
+autocmd FileType vala set tabstop=4
+autocmd FileType vala set shiftwidth=4
+
+"-----------------------------------------
+"vim-indent-guides
+"-----------------------------------------
+autocmd FileType xml IndentGuidesEnable
+autocmd FileType javascript IndentGuidesEnable
+"autocmd FileType vala IndentGuidesEnable
+
+let g:indent_guides_auto_colors = 0
+let g:indent_guides_guide_size = 1
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=red   ctermbg=237
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=green ctermbg=238
 
 "-----------------------------------------
 "Unite
@@ -202,8 +243,8 @@ let g:unite_source_history_yank_enable = 1
 "nnoremap <leader>y :Unite yank<cr>
 
 "nnoremap <leader>f :Unite -auto-resize -start-insert file<cr>
-"nnoremap <leader>f :Unite -auto-resize -direction=botright -start-insert file file_mru file_rec file_rec/async<cr>
-nnoremap <leader>f :Unite -auto-resize -direction=botright -start-insert file_rec file_rec/async<cr>
+nnoremap <leader>f :Unite -auto-resize -direction=botright -start-insert file file_mru file_rec file_rec/async<cr>
+"nnoremap <leader>f :Unite -auto-resize -direction=botright -start-insert file_rec file_rec/async<cr>
 "nnoremap <leader>b :Unite -auto-resize -direction=botright -quick-match buffer<cr>
 "nnoremap <leader>l :Unite -auto-resize -direction=botright -start-insert line<cr>
 "nnoremap <leader>c :Unite -auto-resize -direction=botright -start-insert grep:.<cr>
@@ -217,21 +258,10 @@ nnoremap <leader>ss :Ack!<CR>
 nnoremap <leader>sc :AckFile! <C-R><C-W> %<CR>
 
 "-----------------------------------------
-"Airline
+"Ag
 "-----------------------------------------
-let g:airline_powerline_fonts = 1
-if !exists('g:airline_symbols')
-	let g:airline_symbols = {}
-endif
-let g:airline_left_sep = ''
-let g:airline_left_alt_sep = ''
-let g:airline_right_sep = ''
-let g:airline_right_alt_sep = ''
-let g:airline_symbols.branch = ''
-let g:airline_symbols.readonly = ''
-let g:airline_symbols.linenr = ''
-
-let g:airline#extensions#whitespace#enabled = 0
+"nnoremap <leader>ss :Ag!<CR>
+"nnoremap <leader>sc :AgBuffer! <C-R><C-W> %<CR>
 
 "-----------------------------------------
 "YouCompleteMe
@@ -247,7 +277,7 @@ let g:airline#extensions#whitespace#enabled = 0
 "-----------------------------------------
 "vim-go
 "-----------------------------------------
-" autocmd FileType go map <leader>r :w<CR>:!go test ./...<enter>
+"autocmd FileType go map <leader>r :w<CR>:!go test ./...<enter>
 "autocmd FileType go map <leader>rt :w<CR>:!./test.sh<enter>
 "autocmd FileType go map <leader>b :w<CR>:!./bench.sh<enter>
 "autocmd FileType xml map <leader>l :w<CR>:silent %!xmllint --encode UTF-8--format -<enter>
@@ -331,8 +361,8 @@ nmap <Down> 2<C-E>
 nmap <Left> <C-B>
 nmap <Right> <C-F>
 
-nmap k <C-Y>
-nmap j <C-E>
+nmap k 2<C-Y>
+nmap j 2<C-E>
 nmap n <C-F>
 nmap m <C-B>
 
@@ -341,7 +371,7 @@ set scroll=2
 "scroll 20 characters to right"
 "nmap m 20zl
 "scroll 20 characters to left"
-"nmap n 20zh 
+"nmap n 20zh
 
 "--------------------------------------------
 "ctags database
@@ -349,25 +379,19 @@ set scroll=2
 set autochdir
 set tags=./tags;
 set noautochdir
-"if filereadable("tags")
-	"set tags=tags
-"else
-"au BufRead,BufNewFile *.go set tags=/home/home/person/cscope/gotags
-"au BufRead,BufNewFile *.c  set tags=/home/home/linux-4.5/tags
-"endif
 
 "------------------------------------------
 "cscope database
 "------------------------------------------
-set csprg=/usr/bin/cscope
-set cst
-set nocsverb
-if filereadable("cscope.out")
-    cs add cscope.out
-else
-    cs add /home/home/linux-3.17.1/cscope.out
-endif
-set csverb
+"set csprg=/usr/bin/cscope
+"set cst
+"set nocsverb
+"if filereadable("cscope.out")
+    "cs add cscope.out
+"else
+    "cs add /home/home/linux-3.17.1/cscope.out
+"endif
+"set csverb
 
 "-------------------------------------------
 "taglist
@@ -376,23 +400,17 @@ set csverb
 :autocmd FileType taglist set norelativenumber
 map <leader>t :TlistToggle<cr>
 let Tlist_Use_Right_Window=1
-let Tlist_WinWidth = 40
-
-"--------------------------------------------
-"jump window map key
-"--------------------------------------------
-"nmap <leader>wh <C-W>h
-"nmap <leader>wj <C-W>j
-"nmap <leader>wk <C-W>k
-"nmap <leader>wl <C-W>l
+let Tlist_WinWidth = 60
+let Tlist_Show_One_File = 1
+let Tlist_Close_On_Select= 1
 
 "-------------------------------------------
 "quick browse
 "-------------------------------------------
 nnoremap  <Tab> <c-]>
 nnoremap  <S-Tab> <c-T>
-nnoremap i :GtagsCursor <CR>:ccl<CR>
-nnoremap o <c-o>
+"nnoremap i :GtagsCursor <CR>:ccl<CR>
+"nnoremap o <c-o>
 
 "-------------------------------------------
 "NERD Tree
@@ -412,12 +430,12 @@ augroup HelpInTabs
 augroup END
 
 "Only apply to help files...
-    function! HelpInNewTab ()
-        if &buftype == 'help'
-            "Convert the help window to a tab...
-            execute "normal \<C-W>T"
-        endif
-    endfunction
+function! HelpInNewTab ()
+	if &buftype == 'help'
+		"Convert the help window to a tab...
+		execute "normal \<C-W>T"
+	endif
+endfunction
 
 "============================================================================
 "" Make delete key in Normal mode remove the persistently highlighted matches
@@ -427,18 +445,18 @@ nmap <silent>  <BS>  :nohlsearch<CR>
 "============================================================================
 "" When completing, show all options, insert common prefix, then iterate
 "============================================================================
-set wildmode=list:longest,full
+"set wildmode=list:longest,full
 
 "============================================================================
 "" Set up persistent undo (with all undo files in one directory)
 "============================================================================
-if has('persistent_undo')
-	set undofile
-endif
+"if has('persistent_undo')
+	"set undofile
+"endif
 
-set undodir=$HOME/.VIM_UNDO_FILES
+"set undodir=$HOME/.VIM_UNDO_FILES
 
-set undolevels=5000
+"set undolevels=5000
 
 
 "============================================================================
@@ -459,7 +477,7 @@ set undolevels=5000
 "============================================================================
 "" Fold lines according to the file's syntax
 "============================================================================
-syntax enable
+"syntax enable
 "set foldmethod=syntax
 
 "augroup XML
