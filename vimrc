@@ -12,6 +12,8 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 "Plugin 'Valloric/YouCompleteMe'
+Plugin 'drmingdrmer/vim-toggle-quickfix'
+
 Plugin 'Shougo/neocomplete'
 
 Plugin 'Shougo/unite.vim'
@@ -418,6 +420,12 @@ nnoremap  <S-Tab> <c-T>
 let NERDTreeWinPos = "left"
 let NERDTreeQuitOnOpen = 1
 nmap <leader>k :NERDTreeToggle<enter>
+
+"-------------------------------------------
+"Toggle quick fix window
+"-------------------------------------------
+nmap <leader>q <Plug>window:quickfix:toggle
+nmap <leader>l <Plug>window:location:toggle
 
 "============================================================================
 "" Make :help appear in a full-screen tab, instead of a window
