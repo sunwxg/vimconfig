@@ -426,7 +426,8 @@ nmap <leader>k :NERDTreeToggle<enter>
 "Toggle quick fix window
 "-------------------------------------------
 nmap <leader>q <Plug>window:quickfix:toggle
-nmap <leader>l <Plug>window:location:toggle
+"nmap <leader>l <Plug>window:location:toggle
+nmap <leader>m <C-W>_
 
 "============================================================================
 "" Make :help appear in a full-screen tab, instead of a window
