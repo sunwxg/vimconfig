@@ -11,12 +11,13 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
-"Plugin 'Valloric/YouCompleteMe'
 Plugin 'drmingdrmer/vim-toggle-quickfix'
 
 Plugin 'Shougo/neocomplete'
 
 Plugin 'Shougo/unite.vim'
+
+Plugin 'kien/ctrlp.vim'
 
 "Plugin 'Shougo/neomru.vim'
 
@@ -26,7 +27,6 @@ Plugin 'NLKNguyen/papercolor-theme'
 
 Plugin 'mileszs/ack.vim'
 
-"Plugin 'rking/ag.vim'
 
 Plugin 'fatih/vim-go'
 
@@ -73,6 +73,9 @@ filetype plugin indent on    " required
 "-----------------------------------------------------
 "display
 "-----------------------------------------------------
+"set mouse=n
+"set ttymouse=xterm2
+
 set encoding=utf-8
 set t_Co=256
 set tabstop=4
@@ -176,12 +179,6 @@ inoremap <expr><C-y>  neocomplete#close_popup()
 inoremap <expr><C-e>  neocomplete#cancel_popup()
 
 "-----------------------------------------
-" quick-fix window
-"-----------------------------------------
-nmap  <leader>co :copen <CR>
-nmap  <leader>cc :ccl<CR>
-
-"-----------------------------------------
 "syntastic
 "-----------------------------------------
 "set statusline+=%#warningmsg#
@@ -241,41 +238,58 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=green ctermbg=238
 "-----------------------------------------
 "Unite
 "-----------------------------------------
-let g:unite_source_history_yank_enable = 1
+"let g:unite_source_history_yank_enable = 1
 "nnoremap <leader>y :Unite yank<cr>
 
 "nnoremap <leader>f :Unite -auto-resize -start-insert file<cr>
 "nnoremap <leader>f :Unite -auto-resize -direction=botright -start-insert file file_mru file_rec file_rec/async<cr>
-nnoremap <leader>f :Unite -auto-resize -direction=botright -start-insert file file/async file_rec file_rec/async<cr>
+"nnoremap <leader>f :Unite -auto-resize -direction=botright -start-insert file file/async file_rec file_rec/async<cr>
 "nnoremap <leader>f :Unite -auto-resize -direction=botright -start-insert file_rec file_rec/async<cr>
 "nnoremap <leader>b :Unite -auto-resize -direction=botright -quick-match buffer<cr>
 "nnoremap <leader>l :Unite -auto-resize -direction=botright -start-insert line<cr>
 "nnoremap <leader>c :Unite -auto-resize -direction=botright -start-insert grep:.<cr>
 
 "-----------------------------------------
+"Ctrlp
+"-----------------------------------------
+"let g:ctrlp_map = '<leader>f'
+
+"-----------------------------------------
 "Ack
 "-----------------------------------------
 let g:ackprg = "ag --vimgrep"
 let g:ack_autoclose = 1
+let g:ackhighlight = 1
 nnoremap <leader>ss :Ack!<CR>
 nnoremap <leader>sc :AckFile! <C-R><C-W> %<CR>
 
-"-----------------------------------------
-"Ag
-"-----------------------------------------
-"nnoremap <leader>ss :Ag!<CR>
-"nnoremap <leader>sc :AgBuffer! <C-R><C-W> %<CR>
+"-------------------------------------------
+"Toggle quick fix window
+"-------------------------------------------
+"nmap <leader>q <Plug>window:quickfix:toggle
+nmap <leader>q :call Togglequickfix()<CR>
+nmap <leader>m <C-W>T
+"nmap <leader>l <Plug>window:location:toggle
+"
+function! Togglequickfix()
+	if IsOpened("qf")
+		cclose
+	else
+		call ack#ShowResults()
+		execute "normal \<C-W>T"
+	endif
+endfunction
 
-"-----------------------------------------
-"YouCompleteMe
-"-----------------------------------------
-"let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
+function! IsOpened(typ)
+    if a:typ == "qf"
+        let ids = getqflist({'winid' : 1})
+    else
+        " query location list window
+        let ids = getloclist(0, {'winid' : 1})
+    endif
 
-"let g:ycm_confirm_extra_conf = 0
-"let g:ycm_show_diagnostics_ui = 0
-"nnoremap <leader>gl :YcmCompleter GoToDeclaration<CR>
-"nnoremap <leader>gf :YcmCompleter GoToDefinition<CR>
-"nnoremap <leader>gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
+    return get(ids, "winid", 0) != 0
+endfunction
 
 "-----------------------------------------
 "vim-go
@@ -422,13 +436,6 @@ let NERDTreeWinPos = "left"
 let NERDTreeQuitOnOpen = 1
 nmap <leader>k :NERDTreeToggle<enter>
 
-"-------------------------------------------
-"Toggle quick fix window
-"-------------------------------------------
-nmap <leader>q <Plug>window:quickfix:toggle
-"nmap <leader>l <Plug>window:location:toggle
-nmap <leader>m <C-W>_
-
 "============================================================================
 "" Make :help appear in a full-screen tab, instead of a window
 "============================================================================
@@ -452,67 +459,3 @@ endfunction
 "============================================================================
 nmap <silent>  <BS>  :nohlsearch<CR>
 
-"============================================================================
-"" When completing, show all options, insert common prefix, then iterate
-"============================================================================
-"set wildmode=list:longest,full
-
-"============================================================================
-"" Set up persistent undo (with all undo files in one directory)
-"============================================================================
-"if has('persistent_undo')
-	"set undofile
-"endif
-
-"set undodir=$HOME/.VIM_UNDO_FILES
-
-"set undolevels=5000
-
-
-"============================================================================
-"" Set up a permanent universal vertical marker after 80 columns
-"============================================================================
-
-"    highlight ColorColumn ctermbg=magenta
-"    set colorcolumn=81
-
-"============================================================================
-"" Highlight anything in the 81st column of long lines
-"============================================================================
-
-"highlight ColorColumn ctermbg=magenta
-"call matchadd('ColorColumn', '\%81v', 100)
-
-
-"============================================================================
-"" Fold lines according to the file's syntax
-"============================================================================
-"syntax enable
-"set foldmethod=syntax
-
-"augroup XML
-    "autocmd!
-    "autocmd FileType xml setlocal foldmethod=indent foldlevelstart=999 foldminlines=0
-"augroup END
-
-"============================================================================
-"" Fold lines for which the specified expression produces a fold-level
-"============================================================================
-
-"    set foldexpr=strlen(matchstr(getline(v:lnum),'^-*'))
-"    set foldmethod=expr
-
-
-"============================================================================
-" Make folds auto-open and auto-close when the cursor moves over them
-"============================================================================
-
-"    set foldopen=all
-"    set foldclose=all
-
-
-"============================================================================
-" Show/hide fold structure in the left margin
-"============================================================================
-"set foldcolumn=6
-"set foldcolumn&
