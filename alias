@@ -1,30 +1,16 @@
-alias sendEmail="sendEmail -f sun.wxg@gmail.com  -s smtp.gmail.com -o tls=yes -xu sun.wxg@gmail.com"
-alias l1="ls -1"
-alias l1f="ls -1F"
-alias lf1="ls -1F"
-alias lr='ls -R | grep ":$" | sed -e '\''s/:$//'\'' -e '\''s/[^-][^\/]*\//--/g'\'' -e '\''s/^/   /'\'' -e '\''s/-/|/'\'''
-alias lg='git log --graph --full-history --all --color --pretty=format:"%x1b[31m%h%x09%x1b[32m%d%x1b[0m%x20%s"'
-alias lf='ls -Gl | grep ^d' #Only list directories
-alias lsd='ls -Gal | grep ^d' #Only list directories, including hidden ones
-alias l.='ls -d .*'
+set -o vi
+
+export PATH=$PATH:~/.local/bin
 
 alias ..='cd ..'
 alias ...='cd ../..'
 
 alias diff='colordiff'
 
-alias ports='netstat -tulanp'
-
-alias gl="git log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
-
 alias tmux="tmux -2"
 
 alias tree1="tree -L 1"
 alias tree2="tree -L 2"
-
-alias vim='gvim -v'
-
-#alias gdb="gdb -tui"
 
 alias pd="pushd"
 alias pop="popd"
@@ -33,6 +19,8 @@ alias dirs="dirs -v"
 alias isc="osc -A https://api.suse.de"
 alias oosc="osc -A https://api.opensuse.org"
 alias watch='watch '
+
+alias sshfs="sshfs -o allow_other"
 
 setxkbmap -option ctrl:nocaps
 export PAGER='less'
@@ -49,22 +37,11 @@ export PATH=$PATH:~/.local/bin
 export devel="/home/sun/person/obs/home:xiaoguang_wang:branches:Devel:Desktop:SLE12:SP2"
 export factory="/home/sun/person/obs/home:xiaoguang_wang:branches:GNOME:Factory"
 
-set -o vi
 
-# explain.sh begins
-explain () {
-  if [ "$#" -eq 0 ]; then
-    while read  -p "Command: " cmd; do
-      curl -Gs "https://www.mankier.com/api/explain/?cols="$(tput cols) --data-urlencode "q=$cmd"
-    done
-    echo "Bye!"
-  elif [ "$#" -eq 1 ]; then
-    curl -Gs "https://www.mankier.com/api/explain/?cols="$(tput cols) --data-urlencode "q=$1"
-  else
-    echo "Usage"
-    echo "explain                  interactive mode."
-    echo "explain 'cmd -o | ...'   one quoted command to explain it."
-  fi
-}
-
-source ~/person/my_func.sh
+# for zsh theme
+BULLETTRAIN_PROMPT_ORDER=(
+  status
+  dir
+  git
+  hg
+)
