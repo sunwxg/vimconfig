@@ -21,6 +21,8 @@ alias oosc="osc -A https://api.opensuse.org"
 alias watch='watch '
 
 alias sshfs="sshfs -o allow_other"
+alias grep='grep  --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,po}'
+alias ag='ag --ignore-dir={po,.git}'
 
 setxkbmap -option ctrl:nocaps
 export PAGER='less'
@@ -45,3 +47,8 @@ BULLETTRAIN_PROMPT_ORDER=(
   git
   hg
 )
+
+ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+
+# zle -al  //list all user-defined widgets
+bindkey "^f"   autosuggest-accept
