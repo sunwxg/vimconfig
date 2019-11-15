@@ -19,8 +19,6 @@ Plugin 'Shougo/unite.vim'
 
 Plugin 'kien/ctrlp.vim'
 
-"Plugin 'Shougo/neomru.vim'
-
 Plugin 'NLKNguyen/papercolor-theme'
 
 "Plugin 'jiangmiao/auto-pairs'
@@ -49,12 +47,8 @@ Plugin 'terryma/vim-multiple-cursors'
 Plugin 'hail2u/vim-css3-syntax'
 Plugin 'ap/vim-css-color'
 
-Plugin 'airblade/vim-gitgutter'
-
-"Plugin 'Yggdroot/indentLine'
-
-"Plugin 'Raimondi/delimitMate'
-"Plugin 'ternjs/tern_for_vim'
+"Plugin 'airblade/vim-gitgutter'
+Plugin 'mhinz/vim-signify'
 
 Plugin 'valloric/vim-indent-guides'
 
@@ -255,6 +249,21 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=green ctermbg=238
 "let g:ctrlp_map = '<leader>f'
 
 "-----------------------------------------
+"highlight words
+"-----------------------------------------
+nmap <Leader>ha :call HighlightWordUnderCursor()<CR>
+nmap <Leader>hr :call matchadd('StatusLine', @")<CR>
+nmap <Leader>hd :call clearmatches()<CR>
+
+function! HighlightWordUnderCursor()
+    if getline(".")[col(".")-1] !~# '[[:punct:][:blank:]]' 
+		"exec '2match' 'Visual' '/\V\<'.expand('<cword>').'\>/' 
+		let word = expand('<cword>')
+		call matchadd('StatusLine', word)
+    endif
+endfunction
+
+"-----------------------------------------
 "Ack
 "-----------------------------------------
 let g:ackprg = "ag --vimgrep"
@@ -270,7 +279,7 @@ nnoremap <leader>sc :AckFile! <C-R><C-W> %<CR>
 nmap <leader>q :call Togglequickfix()<CR>
 nmap <leader>m <C-W>T
 "nmap <leader>l <Plug>window:location:toggle
-"
+
 function! Togglequickfix()
 	if IsOpened("qf")
 		cclose
@@ -415,7 +424,7 @@ set noautochdir
 "-------------------------------------------
 :autocmd FileType taglist set nonumber
 :autocmd FileType taglist set norelativenumber
-map <leader>t :TlistToggle<cr>
+nmap <leader>t :TlistToggle<cr>
 let Tlist_Use_Right_Window=1
 let Tlist_WinWidth = 60
 let Tlist_Show_One_File = 1
