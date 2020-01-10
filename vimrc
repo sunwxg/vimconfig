@@ -121,6 +121,8 @@ set relativenumber
 nmap  h :tabprevious<CR>
 nmap  l :tabnext<CR>
 
+nmap <leader>x :quit<CR>
+
 "-----------------------------------------
 "set status bar
 "-----------------------------------------
@@ -230,20 +232,6 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=red   ctermbg=237
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=green ctermbg=238
 
 "-----------------------------------------
-"Unite
-"-----------------------------------------
-"let g:unite_source_history_yank_enable = 1
-"nnoremap <leader>y :Unite yank<cr>
-
-"nnoremap <leader>f :Unite -auto-resize -start-insert file<cr>
-"nnoremap <leader>f :Unite -auto-resize -direction=botright -start-insert file file_mru file_rec file_rec/async<cr>
-"nnoremap <leader>f :Unite -auto-resize -direction=botright -start-insert file file/async file_rec file_rec/async<cr>
-"nnoremap <leader>f :Unite -auto-resize -direction=botright -start-insert file_rec file_rec/async<cr>
-"nnoremap <leader>b :Unite -auto-resize -direction=botright -quick-match buffer<cr>
-"nnoremap <leader>l :Unite -auto-resize -direction=botright -start-insert line<cr>
-"nnoremap <leader>c :Unite -auto-resize -direction=botright -start-insert grep:.<cr>
-
-"-----------------------------------------
 "Ctrlp
 "-----------------------------------------
 "let g:ctrlp_map = '<leader>f'
@@ -266,10 +254,10 @@ endfunction
 "-----------------------------------------
 "Ack
 "-----------------------------------------
-let g:ackprg = "ag --vimgrep"
+let g:ackprg = 'ag --vimgrep --ignore "*po" --ignore ".git"'
 let g:ack_autoclose = 1
 let g:ackhighlight = 1
-nnoremap <leader>ss :Ack!<CR>
+nnoremap <leader>ss :Ack! <C-R><C-W><CR>
 nnoremap <leader>sc :AckFile! <C-R><C-W> %<CR>
 
 "-------------------------------------------
@@ -375,7 +363,7 @@ colorscheme PaperColor
 ":help quoteplus
 "---------------------------------------
 "if has('unnamedplus')
-set clipboard=unnamedplus
+set clipboard=unnamedplus,exclude:cons\|linux
 	"set clipboard=unnamed
 "endif
 
@@ -424,7 +412,7 @@ set noautochdir
 "-------------------------------------------
 :autocmd FileType taglist set nonumber
 :autocmd FileType taglist set norelativenumber
-nmap <leader>t :TlistToggle<cr>
+nmap <leader>t :TlistToggle<cr><c-w>l
 let Tlist_Use_Right_Window=1
 let Tlist_WinWidth = 60
 let Tlist_Show_One_File = 1
