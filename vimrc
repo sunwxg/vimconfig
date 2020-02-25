@@ -19,7 +19,8 @@ Plugin 'Shougo/unite.vim'
 
 Plugin 'kien/ctrlp.vim'
 
-Plugin 'NLKNguyen/papercolor-theme'
+"Plugin 'NLKNguyen/papercolor-theme'
+Plugin 'morhetz/gruvbox'
 
 "Plugin 'jiangmiao/auto-pairs'
 
@@ -257,6 +258,7 @@ endfunction
 let g:ackprg = 'ag --vimgrep --ignore "*po" --ignore ".git"'
 let g:ack_autoclose = 1
 let g:ackhighlight = 1
+let g:ack_mappings = { "t": "<C-W><CR>:ccl<CR><C-W>T" }
 nnoremap <leader>ss :Ack! <C-R><C-W><CR>
 nnoremap <leader>sc :AckFile! <C-R><C-W> %<CR>
 
@@ -347,7 +349,8 @@ set complete+=kspell
 "----------------------------------------
 let g:solarized_termcolors=256
 set background=dark
-colorscheme PaperColor
+"colorscheme PaperColor
+colorscheme gruvbox
 
 "----------------------------------------
 "copy past between two vim in two windows
