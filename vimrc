@@ -241,14 +241,14 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=green ctermbg=238
 "highlight words
 "-----------------------------------------
 nmap <Leader>ha :call HighlightWordUnderCursor()<CR>
-nmap <Leader>hr :call matchadd('StatusLine', @")<CR>
+nmap <Leader>hr :call matchadd('DiffChange', @")<CR>
 nmap <Leader>hd :call clearmatches()<CR>
 
 function! HighlightWordUnderCursor()
     if getline(".")[col(".")-1] !~# '[[:punct:][:blank:]]' 
 		"exec '2match' 'Visual' '/\V\<'.expand('<cword>').'\>/' 
 		let word = expand('<cword>')
-		call matchadd('StatusLine', word)
+		call matchadd('DiffChange', word)
     endif
 endfunction
 
