@@ -48,8 +48,8 @@ BULLETTRAIN_PROMPT_ORDER=(
   hg
 )
 
-ZSH_AUTOSUGGEST_STRATEGY=(history completion)
-#ZSH_AUTOSUGGEST_STRATEGY=(history)
+#ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+ZSH_AUTOSUGGEST_STRATEGY=(history)
 
 # zle -al  //list all user-defined widgets
 bindkey "^f"   autosuggest-accept
