@@ -26,6 +26,7 @@ Plugin 'morhetz/gruvbox'
 
 Plugin 'mileszs/ack.vim'
 
+Plugin 'rust-lang/rust.vim'
 
 Plugin 'fatih/vim-go'
 
@@ -261,6 +262,7 @@ let g:ackhighlight = 1
 let g:ack_mappings = { "t": "<C-W><CR>:ccl<CR><C-W>T" }
 nnoremap <leader>ss :Ack! <C-R><C-W><CR>
 nnoremap <leader>sc :AckFile! <C-R><C-W> %<CR>
+cnoreabbrev Ack Ack!
 
 "-------------------------------------------
 "Toggle quick fix window
@@ -328,6 +330,12 @@ let g:ycm_autoclose_preview_window_after_insertion = 1
 
 let g:go_fmt_fail_silently = 1
 
+
+"-----------------------------------------
+"Rust language
+"-----------------------------------------
+let g:rustfmt_autosave = 1
+
 "-----------------------------------------
 "simple input
 "-----------------------------------------
@@ -366,8 +374,8 @@ colorscheme gruvbox
 ":help quoteplus
 "---------------------------------------
 "if has('unnamedplus')
-set clipboard=unnamedplus,exclude:cons\|linux
-	"set clipboard=unnamed
+set clipboard=unnamed,unnamedplus,exclude:cons\|linux
+	"set clipboard=unnamed,exclude:cons\|linux
 "endif
 
 "----------------------------------------------------------------------
@@ -413,8 +421,8 @@ set noautochdir
 "-------------------------------------------
 "taglist
 "-------------------------------------------
-:autocmd FileType taglist set nonumber
-:autocmd FileType taglist set norelativenumber
+autocmd FileType taglist set nonumber
+autocmd FileType taglist set norelativenumber
 nmap <leader>t :TlistToggle<cr><c-w>l
 let Tlist_Use_Right_Window=1
 let Tlist_WinWidth = 60
