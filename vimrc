@@ -13,7 +13,10 @@ Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'drmingdrmer/vim-toggle-quickfix'
 
-Plugin 'Shougo/neocomplete'
+"Plugin 'Shougo/neocomplete'
+Plugin 'Shougo/deoplete.nvim'
+Plugin 'roxma/nvim-yarp'
+Plugin 'roxma/vim-hug-neovim-rpc'
 
 Plugin 'Shougo/unite.vim'
 
@@ -147,34 +150,47 @@ map q <Nop>
 let g:indentLine_char = '¦'
 
 "-----------------------------------------
+"deoplete
+"-----------------------------------------
+let g:deoplete#enable_at_startup = 1
+call deoplete#custom#option('refresh_backspace', v:false)
+set completeopt+=noinsert
+"popup move down
+inoremap <expr><C-j>  pumvisible() ? "\<C-n>" : ""
+"popup move up
+inoremap <expr><C-k>  pumvisible() ? "\<C-p>" : ""
+"popup select the item
+inoremap <expr><TAB>  pumvisible() ? "\<C-y>" : ""
+
+"-----------------------------------------
 "neocomplete
 "-----------------------------------------
 " Disable AutoComplPop.
-let g:acp_enableAtStartup = 0
-" Use neocomplete.
-let g:neocomplete#enable_at_startup = 1
-" Use smartcase.
-let g:neocomplete#enable_smart_case = 1
-" Set minimum syntax keyword length.
-let g:neocomplete#sources#syntax#min_keyword_length = 3
+"let g:acp_enableAtStartup = 0
+"" Use neocomplete.
+"let g:neocomplete#enable_at_startup = 1
+"" Use smartcase.
+"let g:neocomplete#enable_smart_case = 1
+"" Set minimum syntax keyword length.
+"let g:neocomplete#sources#syntax#min_keyword_length = 3
 
-" Plugin key-mappings.
-inoremap <expr><C-g>     neocomplete#undo_completion()
-"inoremap <expr><C-l>     neocomplete#complete_common_string()
+"" Plugin key-mappings.
+"inoremap <expr><C-g>     neocomplete#undo_completion()
+""inoremap <expr><C-l>     neocomplete#complete_common_string()
 
-" Recommended key-mappings.
-" <CR>: close popup and save indent.
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-function! s:my_cr_function()
-    return neocomplete#close_popup() . "\<CR>"
-endfunction
-" <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+"" Recommended key-mappings.
+"" <CR>: close popup and save indent.
+"inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+"function! s:my_cr_function()
+    "return neocomplete#close_popup() . "\<CR>"
+"endfunction
+"" <TAB>: completion.
+"inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 " <C-h>, <BS>: close popup and delete backword char.
 "inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><C-y>  neocomplete#close_popup()
-inoremap <expr><C-e>  neocomplete#cancel_popup()
+"inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+"inoremap <expr><C-y>  neocomplete#close_popup()
+"inoremap <expr><C-e>  neocomplete#cancel_popup()
 
 "-----------------------------------------
 "syntastic
@@ -425,7 +441,7 @@ autocmd FileType taglist set nonumber
 autocmd FileType taglist set norelativenumber
 nmap <leader>t :TlistToggle<cr><c-w>l
 let Tlist_Use_Right_Window=1
-let Tlist_WinWidth = 60
+"let Tlist_WinWidth = 60
 let Tlist_Show_One_File = 1
 let Tlist_Close_On_Select= 1
 
