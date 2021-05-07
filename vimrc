@@ -13,7 +13,6 @@ Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'drmingdrmer/vim-toggle-quickfix'
 
-"Plugin 'Shougo/neocomplete'
 Plugin 'Shougo/deoplete.nvim'
 Plugin 'roxma/nvim-yarp'
 Plugin 'roxma/vim-hug-neovim-rpc'
@@ -25,10 +24,11 @@ Plugin 'kien/ctrlp.vim'
 "Plugin 'NLKNguyen/papercolor-theme'
 Plugin 'morhetz/gruvbox'
 
-"Plugin 'jiangmiao/auto-pairs'
-
 Plugin 'mileszs/ack.vim'
 
+Plugin 'autozimu/LanguageClient-neovim',
+{'branch': 'next', 'do': 'make release'}
+"{ 'branch': 'next', 'do': 'bash install.sh'}
 Plugin 'rust-lang/rust.vim'
 
 Plugin 'fatih/vim-go'
@@ -36,8 +36,6 @@ Plugin 'fatih/vim-go'
 Plugin 'vim-scripts/taglist.vim'
 
 Plugin 'vim-scripts/gtags.vim'
-
-"Plugin 'janko-m/vim-test'
 
 Plugin 'scrooloose/syntastic'
 
@@ -52,7 +50,6 @@ Plugin 'terryma/vim-multiple-cursors'
 Plugin 'hail2u/vim-css3-syntax'
 Plugin 'ap/vim-css-color'
 
-"Plugin 'airblade/vim-gitgutter'
 Plugin 'mhinz/vim-signify'
 
 Plugin 'valloric/vim-indent-guides'
@@ -351,6 +348,14 @@ let g:go_fmt_fail_silently = 1
 "Rust language
 "-----------------------------------------
 let g:rustfmt_autosave = 1
+
+let g:LanguageClient_serverCommands = {
+			\ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
+			\ }
+
+nmap <silent> K <Plug>(lcn-hover)
+nmap <silent> gd <Plug>(lcn-definition)
+nmap <silent> <F2> <Plug>(lcn-rename)
 
 "-----------------------------------------
 "simple input
