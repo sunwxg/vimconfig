@@ -26,8 +26,7 @@ Plugin 'morhetz/gruvbox'
 
 Plugin 'mileszs/ack.vim'
 
-Plugin 'autozimu/LanguageClient-neovim',
-{'branch': 'next', 'do': 'make release'}
+Plugin 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': 'make release'}
 "{ 'branch': 'next', 'do': 'bash install.sh'}
 Plugin 'rust-lang/rust.vim'
 
