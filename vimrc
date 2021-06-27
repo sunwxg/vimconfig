@@ -28,7 +28,7 @@ Plugin 'mileszs/ack.vim'
 
 Plugin 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': 'make release'}
 "{ 'branch': 'next', 'do': 'bash install.sh'}
-Plugin 'rust-lang/rust.vim'
+"Plugin 'rust-lang/rust.vim'
 
 Plugin 'fatih/vim-go'
 
@@ -149,8 +149,14 @@ let g:indentLine_char = '¦'
 "deoplete
 "-----------------------------------------
 let g:deoplete#enable_at_startup = 1
+"autocmd FileType rust let g:deoplete#enable_at_startup = 0
+call deoplete#custom#option('sources', {
+        \ 'rust': ['LanguageClient'],
+        \ })
+
 call deoplete#custom#option('refresh_backspace', v:false)
 set completeopt+=noinsert
+set completeopt-=preview
 "popup move down
 inoremap <expr><C-j>  pumvisible() ? "\<C-n>" : ""
 "popup move up
@@ -159,34 +165,28 @@ inoremap <expr><C-k>  pumvisible() ? "\<C-p>" : ""
 inoremap <expr><TAB>  pumvisible() ? "\<C-y>" : ""
 
 "-----------------------------------------
-"neocomplete
+"LanguageClient
 "-----------------------------------------
-" Disable AutoComplPop.
-"let g:acp_enableAtStartup = 0
-"" Use neocomplete.
-"let g:neocomplete#enable_at_startup = 1
-"" Use smartcase.
-"let g:neocomplete#enable_smart_case = 1
-"" Set minimum syntax keyword length.
-"let g:neocomplete#sources#syntax#min_keyword_length = 3
+"let g:LanguageClient_usePopupHover = 0
+let g:LanguageClient_serverCommands = {
+			\ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
+			\ }
 
-"" Plugin key-mappings.
-"inoremap <expr><C-g>     neocomplete#undo_completion()
-""inoremap <expr><C-l>     neocomplete#complete_common_string()
+nmap <silent> K <Plug>(lcn-hover)
+nmap <silent> <F2> <Plug>(lcn-rename)
+"nmap <silent> gd <Plug>(lcn-definition)
+nmap <silent> gd  :call LanguageClient#textDocument_definition({
+    \ 'gotoCmd': 'tabnew',
+    \ })<CR>
 
-"" Recommended key-mappings.
-"" <CR>: close popup and save indent.
-"inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-"function! s:my_cr_function()
-    "return neocomplete#close_popup() . "\<CR>"
-"endfunction
-"" <TAB>: completion.
-"inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-" <C-h>, <BS>: close popup and delete backword char.
-"inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-"inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-"inoremap <expr><C-y>  neocomplete#close_popup()
-"inoremap <expr><C-e>  neocomplete#cancel_popup()
+
+"-----------------------------------------
+"Rust language
+"-----------------------------------------
+"let g:rustfmt_autosave = 1
+let g:rustfmt_fail_silently = 1
+let g:rust_conceal = 0
+let g:rustc_path = $HOME."/bin/rustc"
 
 "-----------------------------------------
 "syntastic
@@ -344,19 +344,6 @@ let g:go_fmt_fail_silently = 1
 
 
 "-----------------------------------------
-"Rust language
-"-----------------------------------------
-let g:rustfmt_autosave = 1
-
-let g:LanguageClient_serverCommands = {
-			\ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
-			\ }
-
-nmap <silent> K <Plug>(lcn-hover)
-nmap <silent> gd <Plug>(lcn-definition)
-nmap <silent> <F2> <Plug>(lcn-rename)
-
-"-----------------------------------------
 "simple input
 "-----------------------------------------
 iab #- -----------------------------------------------------
@@ -461,6 +448,8 @@ nnoremap  <S-Tab> <c-T>
 "NERD Tree
 "-------------------------------------------
 let NERDTreeWinPos = "left"
+let NERDTreeWinSize = 40
+let NERDTreeWinSizeMax = 80
 let NERDTreeQuitOnOpen = 1
 nmap <leader>k :NERDTreeToggle<enter>
 
