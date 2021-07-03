@@ -151,11 +151,11 @@ let g:indentLine_char = '¦'
 let g:deoplete#enable_at_startup = 1
 "autocmd FileType rust let g:deoplete#enable_at_startup = 0
 call deoplete#custom#option('sources', {
-        \ 'rust': ['LanguageClient'],
-        \ })
+		\ 'rust': ['LanguageClient'],
+		\ })
 
 call deoplete#custom#option('refresh_backspace', v:false)
-set completeopt+=noinsert
+"set completeopt+=noinsert
 set completeopt-=preview
 "popup move down
 inoremap <expr><C-j>  pumvisible() ? "\<C-n>" : ""
