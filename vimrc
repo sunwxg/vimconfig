@@ -273,7 +273,8 @@ let g:ack_autoclose = 1
 let g:ackhighlight = 1
 let g:ack_mappings = { "t": "<C-W><CR>:ccl<CR><C-W>T" }
 nnoremap <leader>ss :Ack! <C-R><C-W><CR>
-nnoremap <leader>sc :AckFile! <C-R><C-W> %<CR>
+"nnoremap <leader>sc :AckFile! <C-R><C-W> %<CR>
+nnoremap <leader>sc :Ack! <C-R><C-W> %<CR>
 cnoreabbrev Ack Ack!
 
 "-------------------------------------------
